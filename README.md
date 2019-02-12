@@ -1,7 +1,7 @@
 # Ionic 4 Tutorial Course Project
 
 This is the project based on the following crash course:
-[Creating Step by Step Feature Introductions with Shepherd.js](https://youtu.be/qTdwUpQRptc)
+[Ionic 4 Crash Course for Beginners - Build an App](https://youtu.be/qTdwUpQRptc)
 
 ## More Awesome Content
 
