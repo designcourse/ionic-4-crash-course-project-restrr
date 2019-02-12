@@ -9,3 +9,25 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
+
+ion-content {
+    font-family: 'Montserrat';
+}
+
+.picker-toolbar.sc-ion-picker-ios {
+    border-bottom: 0;
+}
+.picker-wrapper.sc-ion-picker-ios {
+    border-top: 0;
+}
+.picker-wrapper.sc-ion-picker-ios {
+    background: #2b2b2b;
+}
+.picker-above-highlight.sc-ion-picker-ios, .picker-below-highlight.sc-ion-picker-ios {
+    background: rgba(0,0,0,.5);
+    border: none;
+}
+.picker-opt {
+    color: white;
+}

@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import {ProgressBarModule} from "angular-progress-bar"
+
 
 @NgModule({
   imports: [
@@ -16,7 +19,19 @@ import { HomePage } from './home.page';
         path: '',
         component: HomePage
       }
-    ])
+    ]),
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animation: false,
+      responsive: true,
+      renderOnClick: false
+    }),
+    
   ],
   declarations: [HomePage]
 })

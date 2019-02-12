@@ -1,5 +1,7 @@
 {
   "name": "wo-timer-pre",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
