@@ -26,6 +26,14 @@ export class HomePage {
   overallTimer: any = false;
   fullTime: any = '00:01:30';
 
+
+  countDownTimer: any = false;
+  timeLeft: any = {
+    m: '00',
+    s: '00'
+  };
+  remainingTime = `${this.timeLeft.m}:${this.timeLeft.s}`;
+
   constructor(private insomnia: Insomnia, private navigationBar: NavigationBar) { 
 
     let autoHide: boolean = true;
@@ -41,6 +49,7 @@ export class HomePage {
     
     if(this.timer) {
       clearInterval(this.timer);
+      clearInterval(this.countDownTimer);
     } 
     if(!this.overallTimer) {
       this.progressTimer();
@@ -56,6 +65,16 @@ export class HomePage {
       this.seconds = timeSplit[2];
 
       let totalSeconds = Math.floor(this.minutes * 60) + parseInt(this.seconds);
+      let secondsLeft = totalSeconds;
+
+      this.countDownTimer = setInterval(() => {
+        if ( secondsLeft >= 0) {
+          this.timeLeft.m = Math.floor(secondsLeft / 60);
+          this.timeLeft.s = secondsLeft - (60 * this.timeLeft.m);
+          this.remainingTime = `${this.pad(this.timeLeft.m, 2)}:${this.pad(this.timeLeft.s, 2)}`;
+          secondsLeft--;
+        }
+      }, 1000);
       
       this.timer = setInterval(() => {
         if(this.percent == this.radius)
@@ -71,11 +90,12 @@ export class HomePage {
   }
 
   stopTimer() {
-    
+    clearInterval(this.countDownTimer);
     clearInterval(this.timer);
     clearInterval(this.overallTimer);
+    this.countDownTimer = false;
     this.overallTimer = false;
-    this.timer = false;
+    this.timer = false;    
     this.percent = 0;
     this.progress = 0;
     this.elapsed = {
@@ -83,6 +103,11 @@ export class HomePage {
       m: '00',
       s: '00'
     }
+    this.timeLeft = {
+      m: '00',
+      s: '00'
+    }
+    this.remainingTime = `${this.pad(this.timeLeft.m, 2)}:${this.pad(this.timeLeft.s, 2)}`;
     this.insomnia.allowSleepAgain()
   }
 
