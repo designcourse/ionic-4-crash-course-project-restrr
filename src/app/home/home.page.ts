@@ -67,26 +67,28 @@ export class HomePage {
       let totalSeconds = Math.floor(this.minutes * 60) + parseInt(this.seconds);
       let secondsLeft = totalSeconds;
 
-      this.countDownTimer = setInterval(() => {
-        if ( secondsLeft >= 0) {
-          this.timeLeft.m = Math.floor(secondsLeft / 60);
-          this.timeLeft.s = secondsLeft - (60 * this.timeLeft.m);
-          this.remainingTime = `${this.pad(this.timeLeft.m, 2)}:${this.pad(this.timeLeft.s, 2)}`;
+      let forwardsTimer = () => {
+        if (this.percent == this.radius) clearInterval(this.timer)
+        this.percent = Math.floor((this.progress / totalSeconds) * 100)
+        ++this.progress
+      }
+
+      let backwardsTimer = () => {
+        if (secondsLeft >= 0) {
+          this.timeLeft.m = Math.floor(secondsLeft / 60)
+          this.timeLeft.s = secondsLeft - (60 * this.timeLeft.m)
+          this.remainingTime = `${this.pad(this.timeLeft.m, 2)}:${this.pad(this.timeLeft.s, 2)}`
           secondsLeft--;
         }
-      }, 1000);
-      
-      this.timer = setInterval(() => {
-        if(this.percent == this.radius)
-          clearInterval(this.timer);
-        
-        this.percent = Math.floor((this.progress / totalSeconds) * 100);
-        this.progress += 1;
-        
-      },1000)
+      }
 
-    
+      // run once when clicked
+      forwardsTimer()
+      backwardsTimer()
 
+      // timers start 1 second later
+      this.countDownTimer = setInterval(backwardsTimer, 1000)
+      this.timer = setInterval(forwardsTimer, 1000)
   }
 
   stopTimer() {
